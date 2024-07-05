@@ -48,10 +48,10 @@ while True:
         break;
     
     elif choice == "report":
-        print("Coffee : ", resource_qty["coffee"], units["coffee"])
-        print("Water : ", resource_qty["water"], units["water"])
-        print("Milk : ", resource_qty["milk"], units["milk"])
-        print("Money : ", units["money"], resource_qty["money"]*0.01)
+        print("Coffee :", resource_qty["coffee"], units["coffee"])
+        print("Water :", resource_qty["water"], units["water"])
+        print("Milk :", resource_qty["milk"], units["milk"])
+        print("Money :", units["money"], resource_qty["money"]*0.01)
         
     elif choice == "espresso" or choice == "latte" or choice == "cappuccino":
         
@@ -85,7 +85,7 @@ while True:
       money_remained = money_inserted - coffee[choice]["price"]
       
       print("Here is $", money_remained*0.01, " in change")
-      print("Here is your ", choice, " ☕ enjoy !")
+      print("Here is your", choice, "☕ enjoy !")
     
     else:
         print("Invalid Option !! ❌")

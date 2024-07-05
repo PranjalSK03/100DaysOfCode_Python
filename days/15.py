@@ -1,6 +1,11 @@
 # coffee machine project
 
-
+units = {
+    "water": "ml",
+    "coffee" : "mg",
+    "milk" : "ml",
+    "money": "$"
+}
 
 resource_qty = {
     "water": 300,
@@ -18,7 +23,7 @@ coins = {
 
 coffee = {
     
-    "espersso" : {"water" : 50,
+    "espresso" : {"water" : 50,
                   "coffee" : 18,
                   "milk" : 0,
                   "price" : 150},
@@ -36,36 +41,56 @@ coffee = {
 
 
 while True:
-    choice = input("What would you like? (Espresso/Latte/Cappuccino)").lower()
+    choice = input("What would you like? (Espresso/Latte/Cappuccino) : ").lower()
     
     if choice == "exit":
         print("Thank you for visiting the Coffee Machine 😁")
         break;
     
     elif choice == "report":
-        print("Coffee : ", resource_qty["coffee"])
-        print("Water : ", resource_qty["water"])
-        print("Milk : ", resource_qty["milk"])
-        print("Money : ", resource_qty["money"]*0.01)
+        print("Coffee : ", resource_qty["coffee"], units["coffee"])
+        print("Water : ", resource_qty["water"], units["water"])
+        print("Milk : ", resource_qty["milk"], units["milk"])
+        print("Money : ", units["money"], resource_qty["money"]*0.01)
         
-    elif True:
+    elif choice == "espresso" or choice == "latte" or choice == "cappuccino":
+        
+      if resource_qty["water"] < coffee[choice]["water"]:
+          print("Sorry there's not enough water.")
+          continue
+      elif resource_qty["coffee"] < coffee[choice]["coffee"]:
+          print("Sorry there's not enough coffee.")
+          continue
+      elif resource_qty["milk"] < coffee[choice]["milk"]:
+          print("Sorry  there's not enough milk.")
+          continue
+      
       print("Please insert the coins.")
       quaters = input("How many quaters ?")  
       dimes = input("How many dimes ?")  
       nickels = input("How many nickels ?")  
       pennies = input("How many pennies ?")
       
-      money_inserted = quaters*coins["quaters"] + dimess*coins["dimes"] + nickels*coins["nickels"] + quaters*coins["nickels"]
-      
-      if resource_qty["water"] < coffee[choice]["water"]:
-          print("Sorry that's not enough water.")
-      elif resource_qty["water"] < coffee[choice]["coffee"]:
-          print("Sorry not enough coffee.")
-      elif resource_qty["water"] < coffee[choice]["milk"]:
-          print("Sorry not enough milk.")
+      money_inserted = int(quaters)*coins["quaters"] + int(dimes)*coins["dimes"] + int(nickels)*coins["nickels"] + int(pennies)*coins["pennies"]
           
-      if resource_qty["water"] > coffee[choice]["water"]:
-          print("Sorry not enough Money.")
+      if money_inserted < coffee[choice]["price"]:
+          print("Sorry there's not enough Money.")
+          continue
+      
+      resource_qty["money"] += coffee[choice]["price"]
+      resource_qty["milk"] -= coffee[choice]["milk"]
+      resource_qty["water"] -= coffee[choice]["water"]
+      resource_qty["coffee"] -= coffee[choice]["coffee"]
+      
+      money_remained = money_inserted - coffee[choice]["price"]
+      
+      print("Here is $", money_remained*0.01, " in change")
+      print("Here is your ", choice, " ☕ enjoy !")
+    
+    else:
+        print("Invalid Option !! ❌")
+          
+
       
         
     

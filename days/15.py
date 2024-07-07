@@ -71,12 +71,15 @@ while True:
       nickels = input("How many nickels ?")  
       pennies = input("How many pennies ?")
       
+      
+      # make a function here
       money_inserted = int(quaters)*coins["quaters"] + int(dimes)*coins["dimes"] + int(nickels)*coins["nickels"] + int(pennies)*coins["pennies"]
           
       if money_inserted < coffee[choice]["price"]:
           print("Sorry there's not enough Money.")
           continue
-      
+
+      # make a function for this    
       resource_qty["money"] += coffee[choice]["price"]
       resource_qty["milk"] -= coffee[choice]["milk"]
       resource_qty["water"] -= coffee[choice]["water"]
